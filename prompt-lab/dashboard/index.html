@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cohort Progress | Orbi Prompt Lab</title>
+<style>
+:root{--bg:#f5f6fa;--surface:#fff;--border:#dfe3ee;--text:#14182b;--muted:#5d6584;--accent:#2a5bd7;--grid:#e8ebf4;
+ --bronze:#a8641f;--silver:#6b7488;--gold:#b88700;--diamond:#0a8fa8;--none:#8a90a6;--good:#0f8a5f;--warn:#b26a00;--bad:#c0283f;--heat:42,91,215}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1222;--surface:#171c33;--border:#2a3157;--text:#e8ecff;--muted:#9aa4d0;--accent:#6c8cff;--grid:#232a4d;
+ --bronze:#e09550;--silver:#b6bdd0;--gold:#f0c24a;--diamond:#5ee7ff;--none:#8a90b0;--good:#3ddc97;--warn:#ffb454;--bad:#ff6b81;--heat:108,140,255}}
+:root[data-theme="dark"]{--bg:#0e1222;--surface:#171c33;--border:#2a3157;--text:#e8ecff;--muted:#9aa4d0;--accent:#6c8cff;--grid:#232a4d;--bronze:#e09550;--silver:#b6bdd0;--gold:#f0c24a;--diamond:#5ee7ff;--none:#8a90b0;--good:#3ddc97;--warn:#ffb454;--bad:#ff6b81;--heat:108,140,255}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,"Segoe UI",system-ui,Arial,sans-serif}
+.wrap{max-width:1240px;margin:0 auto;padding:24px 20px 60px}
+header{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+h1{margin:0;font-size:1.5rem} .sub{color:var(--muted);font-size:.9rem}
+.sp{flex:1}
+.badge{display:inline-block;border:1px solid var(--border);border-radius:99px;padding:3px 12px;font-size:.78rem;font-weight:700;color:var(--muted);background:var(--surface)}
+button.t{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:6px 12px;cursor:pointer;font:inherit}
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:16px}
+.kpi,.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.kpi b{display:block;font-size:1.6rem;line-height:1.2} .kpi span{color:var(--muted);font-size:.8rem}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.row3{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:16px}
+h2{font-size:1rem;margin:0 0 10px}
+.bar{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:.88rem}
+.bar .l{width:112px;flex:none;font-weight:600}
+.bar .tr{flex:1;background:var(--grid);border-radius:4px;height:16px;overflow:hidden}
+.bar .tr i{display:block;height:100%;border-radius:0 4px 4px 0}
+.bar .v{width:64px;text-align:right;color:var(--muted);flex:none}
+.tier{font-weight:700;white-space:nowrap}
+.tier.Bronze{color:var(--bronze)} .tier.Silver{color:var(--silver)} .tier.Gold{color:var(--gold)} .tier.Diamond{color:var(--diamond)} .tier.None{color:var(--none)}
+.fill-Bronze{background:var(--bronze)} .fill-Silver{background:var(--silver)} .fill-Gold{background:var(--gold)} .fill-Diamond{background:var(--diamond)} .fill-None{background:var(--none)}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+input[type=search],select{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font:inherit}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{padding:8px 8px;border-bottom:1px solid var(--border);text-align:left}
+th{color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;white-space:nowrap}
+td.c,th.c{text-align:center}
+.cell{display:inline-block;min-width:38px;padding:3px 0;border-radius:6px;font-weight:600;font-size:.8rem;text-align:center}
+.cell.z{background:var(--grid);color:var(--muted)}
+.list div{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:.88rem}
+.list div:last-child{border:0}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.step{border:1px solid var(--border);border-radius:10px;padding:12px;font-size:.85rem;background:var(--bg)}
+.step b{display:block;margin-bottom:4px} .step code{font-size:.78rem;word-break:break-all}
+.note{color:var(--muted);font-size:.8rem;margin-top:8px}
+@media (max-width:980px){.kpis{grid-template-columns:repeat(3,1fr)}.row,.row3{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}}
+.scroll{overflow-x:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div><h1>Orbi Prompt Lab · Cohort progress</h1><div class="sub" id="cohort"></div></div>
+  <div class="sp"></div>
+  <span class="badge" id="synth">Synthetic demo data</span>
+  <span class="badge" id="asof"></span>
+  <button class="t" id="theme">Toggle theme</button>
+</header>
+<div class="kpis" id="kpis"></div>
+<div class="row">
+  <div class="card"><h2>Tier distribution</h2><div id="tiers"></div></div>
+  <div class="card"><h2>Stage completion funnel</h2><div id="funnel"></div></div>
+</div>
+<div class="card" style="margin-bottom:16px">
+  <h2>Participants</h2>
+  <div class="tools"><input type="search" id="q" placeholder="Search name"><select id="tf"><option value="">All tiers</option><option>Diamond</option><option>Gold</option><option>Silver</option><option>Bronze</option><option>Not started</option></select><span class="note" style="margin:0;align-self:center">Cells show XP earned per stage (max 100). Click a column header to sort.</span></div>
+  <div class="scroll"><table id="tbl"></table></div>
+</div>
+<div class="row3">
+  <div class="card"><h2>Needs attention</h2><div class="list" id="risk"></div></div>
+  <div class="card"><h2>◆ Fast movers</h2><div class="list" id="fast"></div><div class="note">Diamond = all 5 stages + stretch challenge within <span id="fm"></span> minutes.</div></div>
+</div>
+<div class="card" style="margin-bottom:16px">
+  <h2>How the data gets here <span class="badge">mock flow</span></h2>
+  <div class="flow">
+    <div class="step"><b>1 · Fork</b>Participant forks <code>unext-learning/prompt-lab-cohort</code></div>
+    <div class="step"><b>2 · Commit</b>Course page exports <code>progress.json</code>; participant commits it to <code>progress/&lt;name&gt;.json</code></div>
+    <div class="step"><b>3 · Aggregate</b>A GitHub Action merges all <code>progress/*.json</code> into <code>data.json</code> on every push</div>
+    <div class="step"><b>4 · Publish</b>GitHub Pages serves this page, which reads <code>data.json</code>. No server, no licence cost.</div>
+  </div>
+  <div class="note">Tier rules: Bronze = 1 stage · Silver = 3 stages · Gold = all 5 · Diamond = Gold + stretch within the fast-mover window.</div>
+</div>
+<div class="note">Names and numbers on this page are synthetic.</div>
+</div>
+<script id="embedded" type="application/json">{"cohort": "UNext \u00b7 Orbi Prompt Lab pilot", "asOf": "2026-11-19T10:30:00", "fastMinutes": 150, "synthetic": true, "participants": [{"name": "Aarav Menon", "stagesCompleted": 5, "stageXp": [83, 98, 85, 98, 88], "stretchXp": 100, "minutesToStretch": 118, "xp": 552, "tier": "Diamond", "startedAt": "2026-11-16T07:30:00", "lastActive": "2026-11-19T08:57:00", "activeMinutes": 149}, {"name": "Ananya Iyer", "stagesCompleted": 5, "stageXp": [100, 86, 90, 85, 90], "stretchXp": 100, "minutesToStretch": 131, "xp": 551, "tier": "Diamond", "startedAt": "2026-11-16T07:30:00", "lastActive": "2026-11-19T09:13:00", "activeMinutes": 143}, {"name": "Vaishnavi Gowda", "stagesCompleted": 5, "stageXp": [92, 91, 82, 100, 88], "stretchXp": 100, "minutesToStretch": 142, "xp": 553, "tier": "Diamond", "startedAt": "2026-11-16T10:30:00", "lastActive": "2026-11-18T09:23:00", "activeMinutes": 157}, {"name": "Divya Nair", "stagesCompleted": 5, "stageXp": [96, 94, 84, 85, 95], "stretchXp": 0, "minutesToStretch": null, "xp": 454, "tier": "Gold", "startedAt": "2026-11-16T10:30:00", "lastActive": "2026-11-19T09:53:00", "activeMinutes": 180}, {"name": "Harish Kumar", "stagesCompleted": 5, "stageXp": [95, 94, 96, 91, 100], "stretchXp": 100, "minutesToStretch": 205, "xp": 576, "tier": "Gold", "startedAt": "2026-11-16T09:30:00", "lastActive": "2026-11-18T03:50:00", "activeMinutes": 153}, {"name": "Kavya Shetty", "stagesCompleted": 5, "stageXp": [89, 99, 100, 85, 88], "stretchXp": 0, "minutesToStretch": null, "xp": 461, "tier": "Gold", "startedAt": "2026-11-16T07:30:00", "lastActive": "2026-11-18T09:22:00", "activeMinutes": 144}, {"name": "Rohit Agarwal", "stagesCompleted": 5, "stageXp": [97, 85, 99, 96, 82], "stretchXp": 0, "minutesToStretch": null, "xp": 459, "tier": "Gold", "startedAt": "2026-11-16T07:30:00", "lastActive": "2026-11-17T06:52:00", "activeMinutes": 143}, {"name": "Meera Krishnan", "stagesCompleted": 5, "stageXp": [98, 97, 98, 97, 93], "stretchXp": 0, "minutesToStretch": null, "xp": 483, "tier": "Gold", "startedAt": "2026-11-16T07:30:00", "lastActive": "2026-11-19T08:19:00", "activeMinutes": 151}, {"name": "Bhavya Reddy", "stagesCompleted": 4, "stageXp": [89, 84, 82, 96, 45], "stretchXp": 0, "minutesToStretch": null, "xp": 396, "tier": "Silver", "startedAt": "2026-11-16T07:30:00", "lastActive": "2026-11-19T09:23:00", "activeMinutes": 155}, {"name": "Jayanth Raghavan", "stagesCompleted": 3, "stageXp": [90, 86, 97, 60, 0], "stretchXp": 0, "minutesToStretch": null, "xp": 333, "tier": "Silver", "startedAt": "2026-11-16T08:30:00", "lastActive": "2026-11-19T09:05:00", "activeMinutes": 123}, {"name": "Priya Venkatesh", "stagesCompleted": 3, "stageXp": [87, 96, 96, 20, 0], "stretchXp": 0, "minutesToStretch": null, "xp": 299, "tier": "Silver", "startedAt": "2026-11-16T08:30:00", "lastActive": "2026-11-18T07:47:00", "activeMinutes": 118}, {"name": "Naveen Prasad", "stagesCompleted": 3, "stageXp": [83, 84, 88, 0, 0], "stretchXp": 0, "minutesToStretch": null, "xp": 255, "tier": "Silver", "startedAt": "2026-11-16T08:30:00", "lastActive": "2026-11-18T04:42:00", "activeMinutes": 97}, {"name": "Sneha Kulkarni", "stagesCompleted": 4, "stageXp": [85, 96, 84, 96, 30], "stretchXp": 0, "minutesToStretch": null, "xp": 391, "tier": "Silver", "startedAt": "2026-11-16T07:30:00", "lastActive": "2026-11-18T05:29:00", "activeMinutes": 132}, {"name": "Tarun Mehta", "stagesCompleted": 3, "stageXp": [95, 90, 84, 55, 0], "stretchXp": 0, "minutesToStretch": null, "xp": 324, "tier": "Silver", "startedAt": "2026-11-16T10:30:00", "lastActive": "2026-11-19T10:20:00", "activeMinutes": 124}, {"name": "Chaitanya Rao", "stagesCompleted": 2, "stageXp": [91, 96, 40, 0, 0], "stretchXp": 0, "minutesToStretch": null, "xp": 227, "tier": "Bronze", "startedAt": "2026-11-16T10:30:00", "lastActive": "2026-11-18T08:51:00", "activeMinutes": 91}, {"name": "Farhan Sheikh", "stagesCompleted": 1, "stageXp": [84, 50, 0, 0, 0], "stretchXp": 0, "minutesToStretch": null, "xp": 134, "tier": "Bronze", "startedAt": "2026-11-16T07:30:00", "lastActive": "2026-11-17T04:50:00", "activeMinutes": 57}, {"name": "Gayathri Subramanian", "stagesCompleted": 2, "stageXp": [82, 94, 10, 0, 0], "stretchXp": 0, "minutesToStretch": null, "xp": 186, "tier": "Bronze", "startedAt": "2026-11-16T08:30:00", "lastActive": "2026-11-16T05:28:00", "activeMinutes": 79}, {"name": "Ishita Banerjee", "stagesCompleted": 1, "stageXp": [99, 25, 0, 0, 0], "stretchXp": 0, "minutesToStretch": null, "xp": 124, "tier": "Bronze", "startedAt": "2026-11-16T08:30:00", "lastActive": "2026-11-16T08:17:00", "activeMinutes": 48}, {"name": "Lokesh Varma", "stagesCompleted": 0, "stageXp": [0, 0, 0, 0, 0], "stretchXp": 0, "minutesToStretch": null, "xp": 0, "tier": "Not started", "startedAt": "2026-11-16T08:30:00", "lastActive": "2026-11-13T10:29:00", "activeMinutes": 0}, {"name": "Omkar Patil", "stagesCompleted": 0, "stageXp": [0, 0, 0, 0, 0], "stretchXp": 0, "minutesToStretch": null, "xp": 0, "tier": "Not started", "startedAt": "2026-11-16T08:30:00", "lastActive": "2026-11-13T05:17:00", "activeMinutes": 0}]}</script>
+<script>
+const TIERS=["Diamond","Gold","Silver","Bronze","Not started"];
+const cls=t=>t==="Not started"?"None":t;
+let D=JSON.parse(document.getElementById("embedded").textContent),sortKey="xp",sortDir=-1;
+if(location.protocol!=="file:")fetch("data.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.participants){D=j;draw()}}).catch(()=>{});
+const asOf=()=>new Date(D.asOf);
+const rel=iso=>{const m=Math.round((asOf()-new Date(iso))/60000);if(m<60)return m+" min ago";if(m<1440)return Math.round(m/60)+" h ago";return Math.round(m/1440)+" d ago"};
+const fmtMin=m=>m==null?"-":(Math.floor(m/60)+"h "+String(m%60).padStart(2,"0")+"m");
+function draw(){
+  const P=D.participants,n=P.length;
+  document.getElementById("cohort").textContent=D.cohort+" · "+n+" participants";
+  document.getElementById("synth").style.display=D.synthetic?"":"none";
+  document.getElementById("asof").textContent="As of "+asOf().toLocaleString("en-IN",{dateStyle:"medium",timeStyle:"short"});
+  document.getElementById("fm").textContent=D.fastMinutes;
+  const avgDone=P.reduce((a,p)=>a+p.stagesCompleted,0)/n/5*100;
+  const active=P.filter(p=>(asOf()-new Date(p.lastActive))<864e5).length;
+  const diamonds=P.filter(p=>p.tier==="Diamond").length;
+  const started=P.filter(p=>p.xp>0);
+  const kp=[[n,"Participants"],[Math.round(avgDone)+"%","Avg completion"],[active,"Active in last 24h"],[diamonds,"◆ Diamond"],[Math.round(P.reduce((a,p)=>a+p.xp,0)/n),"Avg XP"],[started.length+"/"+n,"Started"]];
+  document.getElementById("kpis").innerHTML=kp.map(k=>`<div class="kpi"><b>${k[0]}</b><span>${k[1]}</span></div>`).join("");
+  const cnt=Object.fromEntries(TIERS.map(t=>[t,P.filter(p=>p.tier===t).length]));
+  document.getElementById("tiers").innerHTML=TIERS.map(t=>`<div class="bar"><div class="l tier ${cls(t)}">${t==="Not started"?"":"◆ "}${t}</div><div class="tr"><i class="fill-${cls(t)}" style="width:${cnt[t]/n*100}%"></i></div><div class="v">${cnt[t]} · ${Math.round(cnt[t]/n*100)}%</div></div>`).join("");
+  const SN=["S1 Anatomy","S2 Reply","S3 Extract","S4 Sort","S5 Evals"];let f="";for(let s=1;s<=5;s++){const c=P.filter(p=>p.stagesCompleted>=s).length;f+=`<div class="bar"><div class="l">${SN[s-1]}</div><div class="tr"><i style="width:${c/n*100}%;background:var(--accent)"></i></div><div class="v">${c}/${n}</div></div>`}
+  const sc=P.filter(p=>p.stretchXp>0).length;f+=`<div class="bar"><div class="l">◆ Stretch</div><div class="tr"><i style="width:${sc/n*100}%;background:var(--diamond)"></i></div><div class="v">${sc}/${n}</div></div>`;
+  document.getElementById("funnel").innerHTML=f;
+  const risk=P.filter(p=>p.stagesCompleted<5&&(asOf()-new Date(p.lastActive))>=2*864e5).sort((a,b)=>new Date(a.lastActive)-new Date(b.lastActive));
+  document.getElementById("risk").innerHTML=risk.length?risk.map(p=>`<div><span>${p.name} <span class="sub">· stage ${Math.min(5,p.stagesCompleted+1)}</span></span><span style="color:var(--${p.xp?"warn":"bad"})">${p.xp?"idle ":"not started · "}${rel(p.lastActive)}</span></div>`).join(""):`<div class="sub">Nobody is stuck.</div>`;
+  const fast=P.filter(p=>p.tier==="Diamond").sort((a,b)=>a.minutesToStretch-b.minutesToStretch);
+  document.getElementById("fast").innerHTML=fast.map((p,i)=>`<div><span>${i+1}. ${p.name}</span><b class="tier Diamond">${fmtMin(p.minutesToStretch)}</b></div>`).join("")||`<div class="sub">No Diamond yet.</div>`;
+  table();
+}
+function table(){
+  const q=document.getElementById("q").value.toLowerCase(),tf=document.getElementById("tf").value;
+  let rows=D.participants.filter(p=>p.name.toLowerCase().includes(q)&&(!tf||p.tier===tf));
+  const val=p=>sortKey==="name"?p.name:sortKey==="tier"?TIERS.indexOf(p.tier):sortKey==="last"?-new Date(p.lastActive):sortKey==="time"?(p.minutesToStretch==null?1e9:p.minutesToStretch):sortKey.startsWith("s")&&sortKey.length==2?p.stageXp[+sortKey[1]-1]:p[sortKey];
+  rows.sort((a,b)=>{const x=val(a),y=val(b);return (x>y?1:x<y?-1:0)*sortDir});
+  const heat=v=>v?`<span class="cell" style="background:rgba(var(--heat),${(.15+.6*v/100).toFixed(2)});color:var(--text)">${v}</span>`:`<span class="cell z">·</span>`;
+  const th=(k,l,c)=>`<th class="${c||""}" data-k="${k}">${l}${sortKey===k?(sortDir<0?" ▼":" ▲"):""}</th>`;
+  document.getElementById("tbl").innerHTML=`<tr><th>#</th>${th("name","Participant")}${th("tier","Tier")}${th("xp","XP")}${[1,2,3,4,5].map(i=>th("s"+i,"S"+i,"c")).join("")}${th("stretchXp","◆ Stretch","c")}${th("time","Stretch time")}${th("last","Last active")}</tr>`+
+   rows.map((p,i)=>`<tr><td class="sub">${i+1}</td><td><b>${p.name}</b></td><td class="tier ${cls(p.tier)}">${p.tier==="Not started"?"Not started":"◆ "+p.tier}</td><td><b>${p.xp}</b></td>${p.stageXp.map(v=>`<td class="c">${heat(v)}</td>`).join("")}<td class="c">${p.stretchXp?heat(p.stretchXp):`<span class="cell z">·</span>`}</td><td>${fmtMin(p.minutesToStretch)}</td><td class="sub">${rel(p.lastActive)}</td></tr>`).join("")||`<tr><td colspan="12" class="sub">No participants match.</td></tr>`;
+}
+document.getElementById("tbl").addEventListener("click",e=>{const h=e.target.closest("th[data-k]");if(!h)return;const k=h.dataset.k;if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=(k==="name"||k==="tier"||k==="time"||k==="last")?1:-1}table()});
+document.getElementById("q").addEventListener("input",table);document.getElementById("tf").addEventListener("change",table);
+document.getElementById("theme").addEventListener("click",()=>{const r=document.documentElement,dark=getComputedStyle(r).getPropertyValue("--bg").trim()==="#0e1222";r.setAttribute("data-theme",dark?"light":"dark")});
+draw();
+</script>
+</body>
+</html>

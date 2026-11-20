@@ -1,0 +1,368 @@
+{
+  "cohort": "Tredence \u00d7 UNext \u00b7 RAG Foundations pilot",
+  "asOf": "2026-10-26T10:30:00",
+  "fastMinutes": 150,
+  "synthetic": true,
+  "participants": [
+    {
+      "name": "Aarav Menon",
+      "stagesCompleted": 5,
+      "stageXp": [
+        88,
+        88,
+        95,
+        99,
+        83
+      ],
+      "stretchXp": 100,
+      "minutesToStretch": 118,
+      "xp": 553,
+      "tier": "Diamond",
+      "startedAt": "2026-10-23T09:30:00",
+      "lastActive": "2026-10-26T09:28:00",
+      "activeMinutes": 163
+    },
+    {
+      "name": "Ananya Iyer",
+      "stagesCompleted": 5,
+      "stageXp": [
+        98,
+        87,
+        95,
+        89,
+        95
+      ],
+      "stretchXp": 100,
+      "minutesToStretch": 131,
+      "xp": 564,
+      "tier": "Diamond",
+      "startedAt": "2026-10-23T09:30:00",
+      "lastActive": "2026-10-26T08:29:00",
+      "activeMinutes": 161
+    },
+    {
+      "name": "Vaishnavi Gowda",
+      "stagesCompleted": 5,
+      "stageXp": [
+        89,
+        86,
+        86,
+        88,
+        97
+      ],
+      "stretchXp": 100,
+      "minutesToStretch": 142,
+      "xp": 546,
+      "tier": "Diamond",
+      "startedAt": "2026-10-23T07:30:00",
+      "lastActive": "2026-10-25T08:15:00",
+      "activeMinutes": 158
+    },
+    {
+      "name": "Divya Nair",
+      "stagesCompleted": 5,
+      "stageXp": [
+        82,
+        82,
+        91,
+        99,
+        99
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 453,
+      "tier": "Gold",
+      "startedAt": "2026-10-23T10:30:00",
+      "lastActive": "2026-10-26T08:28:00",
+      "activeMinutes": 177
+    },
+    {
+      "name": "Harish Kumar",
+      "stagesCompleted": 5,
+      "stageXp": [
+        82,
+        96,
+        99,
+        92,
+        92
+      ],
+      "stretchXp": 100,
+      "minutesToStretch": 205,
+      "xp": 561,
+      "tier": "Gold",
+      "startedAt": "2026-10-23T07:30:00",
+      "lastActive": "2026-10-25T06:46:00",
+      "activeMinutes": 146
+    },
+    {
+      "name": "Kavya Shetty",
+      "stagesCompleted": 5,
+      "stageXp": [
+        83,
+        90,
+        88,
+        94,
+        95
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 450,
+      "tier": "Gold",
+      "startedAt": "2026-10-23T09:30:00",
+      "lastActive": "2026-10-25T10:24:00",
+      "activeMinutes": 142
+    },
+    {
+      "name": "Rohit Agarwal",
+      "stagesCompleted": 5,
+      "stageXp": [
+        86,
+        99,
+        99,
+        83,
+        83
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 450,
+      "tier": "Gold",
+      "startedAt": "2026-10-23T07:30:00",
+      "lastActive": "2026-10-24T09:07:00",
+      "activeMinutes": 159
+    },
+    {
+      "name": "Meera Krishnan",
+      "stagesCompleted": 5,
+      "stageXp": [
+        84,
+        99,
+        92,
+        85,
+        95
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 455,
+      "tier": "Gold",
+      "startedAt": "2026-10-23T10:30:00",
+      "lastActive": "2026-10-26T08:45:00",
+      "activeMinutes": 165
+    },
+    {
+      "name": "Bhavya Reddy",
+      "stagesCompleted": 4,
+      "stageXp": [
+        100,
+        84,
+        83,
+        93,
+        45
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 405,
+      "tier": "Silver",
+      "startedAt": "2026-10-23T10:30:00",
+      "lastActive": "2026-10-26T08:15:00",
+      "activeMinutes": 159
+    },
+    {
+      "name": "Jayanth Raghavan",
+      "stagesCompleted": 3,
+      "stageXp": [
+        84,
+        86,
+        90,
+        60,
+        0
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 320,
+      "tier": "Silver",
+      "startedAt": "2026-10-23T08:30:00",
+      "lastActive": "2026-10-26T07:41:00",
+      "activeMinutes": 135
+    },
+    {
+      "name": "Priya Venkatesh",
+      "stagesCompleted": 3,
+      "stageXp": [
+        95,
+        93,
+        98,
+        20,
+        0
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 306,
+      "tier": "Silver",
+      "startedAt": "2026-10-23T07:30:00",
+      "lastActive": "2026-10-25T06:06:00",
+      "activeMinutes": 116
+    },
+    {
+      "name": "Naveen Prasad",
+      "stagesCompleted": 3,
+      "stageXp": [
+        83,
+        83,
+        86,
+        0,
+        0
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 252,
+      "tier": "Silver",
+      "startedAt": "2026-10-23T10:30:00",
+      "lastActive": "2026-10-25T06:23:00",
+      "activeMinutes": 103
+    },
+    {
+      "name": "Sneha Kulkarni",
+      "stagesCompleted": 4,
+      "stageXp": [
+        97,
+        83,
+        100,
+        87,
+        30
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 397,
+      "tier": "Silver",
+      "startedAt": "2026-10-23T10:30:00",
+      "lastActive": "2026-10-25T05:29:00",
+      "activeMinutes": 152
+    },
+    {
+      "name": "Tarun Mehta",
+      "stagesCompleted": 3,
+      "stageXp": [
+        95,
+        83,
+        91,
+        55,
+        0
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 324,
+      "tier": "Silver",
+      "startedAt": "2026-10-23T07:30:00",
+      "lastActive": "2026-10-26T10:26:00",
+      "activeMinutes": 120
+    },
+    {
+      "name": "Chaitanya Rao",
+      "stagesCompleted": 2,
+      "stageXp": [
+        87,
+        85,
+        40,
+        0,
+        0
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 212,
+      "tier": "Bronze",
+      "startedAt": "2026-10-23T10:30:00",
+      "lastActive": "2026-10-25T06:28:00",
+      "activeMinutes": 76
+    },
+    {
+      "name": "Farhan Sheikh",
+      "stagesCompleted": 1,
+      "stageXp": [
+        95,
+        50,
+        0,
+        0,
+        0
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 145,
+      "tier": "Bronze",
+      "startedAt": "2026-10-23T10:30:00",
+      "lastActive": "2026-10-24T04:13:00",
+      "activeMinutes": 68
+    },
+    {
+      "name": "Gayathri Subramanian",
+      "stagesCompleted": 2,
+      "stageXp": [
+        92,
+        99,
+        10,
+        0,
+        0
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 201,
+      "tier": "Bronze",
+      "startedAt": "2026-10-23T07:30:00",
+      "lastActive": "2026-10-23T10:24:00",
+      "activeMinutes": 64
+    },
+    {
+      "name": "Ishita Banerjee",
+      "stagesCompleted": 1,
+      "stageXp": [
+        88,
+        25,
+        0,
+        0,
+        0
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 113,
+      "tier": "Bronze",
+      "startedAt": "2026-10-23T07:30:00",
+      "lastActive": "2026-10-23T09:11:00",
+      "activeMinutes": 47
+    },
+    {
+      "name": "Lokesh Varma",
+      "stagesCompleted": 0,
+      "stageXp": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 0,
+      "tier": "Not started",
+      "startedAt": "2026-10-23T09:30:00",
+      "lastActive": "2026-10-20T03:52:00",
+      "activeMinutes": 0
+    },
+    {
+      "name": "Omkar Patil",
+      "stagesCompleted": 0,
+      "stageXp": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stretchXp": 0,
+      "minutesToStretch": null,
+      "xp": 0,
+      "tier": "Not started",
+      "startedAt": "2026-10-23T07:30:00",
+      "lastActive": "2026-10-20T06:51:00",
+      "activeMinutes": 0
+    }
+  ]
+}

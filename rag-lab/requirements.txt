@@ -1,0 +1,6 @@
+streamlit>=1.50
+openai>=1.40
+pypdf>=4.0
+python-docx
+numpy
+pandas

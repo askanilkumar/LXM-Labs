@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Lab runtime artefacts - regenerated on first run, never commit
+.cache/
+evals/
+*.log
+
+# Secrets - the labs read keys from the sidebar or the environment, never from a file
+.env
+.streamlit/secrets.toml
+
+# OS
+.DS_Store
+Thumbs.db
